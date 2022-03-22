@@ -49,3 +49,43 @@ entiers. Ce calcul se fera une seule fois dans setup() ou dans mouseClicked ou k
 quand les termes du polynôme changent. Pour les "boutons" il s’agit de 6 rectangles dessinés
 dans draw() et de 6 tests dans mouseClicked() qui réagissent si la souris a cliqué exactement
 dans l’un des 6 carrés.
+
+## Le picking
+  Afin de permettre de tester ou se trouve un nombre dans les 2 formes affichées nous
+souhaitons pouvoir "cliquer" sur un nombre et que ce dernier s’affiche différemment dans les
+2 formes. Pour se faire vous donnerez une nombre en attribut sur les vertex qui le
+représentent mypshape.attrib("idnum", (float)nn);
+Il est préférable de passer un flottant pour des raisons de performances mais bien sur il
+représente toujours un entier. Vous créerez ensuite un shader qui declare cet attribut pour
+chaque vertex et le met en interpolation entre chaque vertex. Si tous les sommet/vertices d’un
+cube/sphere on le meme nombre k’interpolation au niveau du fragment/pixel donnera
+forcement le meme nombre. Vous passerez par ailleurs une valeur uniforme avec
+myshader.set("idselect", 28) et vous déclarerez une variable uniforme (ici idselect) dans votre
+shader. Les valuers uniform étant uniformes sur tous les vertex pas besoin de les interpoler.
+On peut récupérer la valeur directement dans le fragment. Il ne reste plus qu’a tester les 2
+nombres avec une petite tolerance (ie 0.1) et afficher une couleur spéciale pour les pixels en
+questions. Ainsi il n’y a pas besoin de refaire le modele quand le nombre cliqué change .
+Pour savoir quel nombre est cliqué il faut faire un autre shader plus malin. Ce shader affiche
+une couleur en fonction du nombre (passé en attribut). Il faut diviser le nombre en trois
+parties avec la fonction modulo :
+N0 = mod(n, 256),
+N1 = mod ((n-N0 ) /256), 256);
+N2 = mod ((n-N0-N1*256 ) /256*256), 256);
+Sachant que l’on pourra reconstruire n = N0+N1*256+n2*256*256 il suffit de donner
+comme r, g et b des pixels fragments N0/255.0, N1/255.0 et N2/255.0
+Ainsi dans la fonction mouseCliqued() il faudra créer un PGraphics pour la 3D et tout
+afficher dedans avec le nouveau shader
+g1 = createGraphics(1540, 1560, P3D);
+g1.loadPixels() ;
+g1.beginDraw();
+//preparation du dessin ici (translate, rotate, etc
+g1.shader(nouveauShader);
+// il faudra peut-etre recréer les modèles ici
+g1.shape(monModele3D);
+g1.resetShader();
+g1.endDraw();
+Cette technique n’affiche rien a l’ecran mais dessine dans une image ou il est ensuite possible
+de "lire" la couleur des pixels, par exemple sous la souris sous la souris avec
+int p = g1.get(mouseX, mouseY);
+Et avec les blue(p), green(pet red(p) qui par magie sont entre 0 et 255 on peut recréer le
+nombre n qui a été clique avec la sou
