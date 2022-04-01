@@ -35,18 +35,20 @@ void draw() {
  tab(k);*/
  
  // =================== Spiral ====================
+ // inspiré de Codin Train (Youtube)
  // variable
  int x = width/2;
  int y = height/2;
- box(10);
  
- for(int i = 0, i < SQUARE_TAB; i++) {
-   stroke(400);
+ 
+ for(int i = 0; i < 361; i++) {
+   stroke(4000);
    rectMode(CENTER);
-   if(sommeDesDiviseur(n) == 2 * n) { fill(16, 52, 166); } // Nombre parfait en bleu egyptien
-        else if(sommeDesDiviseur(n) == n + 1) { fill(121, 248, 248); } // Nombre premier en bleu cyan
-        else if(sommeDesDiviseur(n) <= 2 * n) { fill(6, 119, 144);  } // Nombre deficient bleu paon
-        else if(sommeDesDiviseur(n) >= 2 * n) { fill(142, 162, 198); } // Nombre abondant bleu charron
+   if(sommeDesDiviseur(i) == 2 * i) { fill(16, 52, 166); } // Nombre parfait en bleu egyptien
+        else if(sommeDesDiviseur(i) == i + 1) { fill(121, 248, 248); } // Nombre premier en bleu cyan
+        else if(sommeDesDiviseur(i) <= 2 * i) { fill(6, 119, 144);  } // Nombre deficient bleu paon
+        else if(sommeDesDiviseur(i) >= 2 * i) { fill(142, 162, 198); } // Nombre abondant bleu charron
+        square(x,y,45);
         
    switch (current) {
     case 0: x += stepSize;
@@ -67,7 +69,7 @@ void draw() {
   }
   step++;
 
- }
+}
   //if(step > totalDir){
   //  noLoop();
   //}
@@ -117,6 +119,3 @@ int sommeDesDiviseur(int n) {
 //  }
 //}
 // =================================================
-
-
-
