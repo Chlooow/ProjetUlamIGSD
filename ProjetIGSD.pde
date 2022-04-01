@@ -1,6 +1,7 @@
-/* Pojet Ulam */
+// ================= Projet D'ulam ==============
 
-//int pixel = 10; 
+// ============ Variables =======================
+
 int SQUARE_TAB = 10; // size du tableau
 int step = 1;
 int stepSize = 50;
@@ -14,6 +15,8 @@ int px;
 int py;
 
 
+// ============ Void Setup =======================
+
 void setup() {
   size(1000, 1000, P3D);
   strokeWeight(2);
@@ -21,27 +24,31 @@ void setup() {
   noLoop();
 }
 
-// afficher le tableau 
-//void tab(int n){
-    
-//    for(int i = 0; i < SQUARE_TAB; i++) {
-//      for(int j = 0; j < SQUARE_TAB; j++) {
-//        n++;
-//        if(sommeDesDiviseur(n) == 2 * n) { fill(16, 52, 166); } // Nombre parfait en bleu egyptien
-//        else if(sommeDesDiviseur(n) == n + 1) { fill(121, 248, 248); } // Nombre premier en bleu cyan
-//        else if(sommeDesDiviseur(n) <= 2 * n) { fill(6, 119, 144);  } // Nombre deficient bleu paon
-//        else if(sommeDesDiviseur(n) >= 2 * n) { fill(142, 162, 198); } // Nombre abondant bleu charron
-        
-//        System.out.println( n + " :" + sommeDesDiviseur(n));
-//        rect(j*80, i*80, 80, 80);
-//    }
-//  }
-//}
 
-void tab2(int nb) {
-  box(10);
-  for(int i = 0; i < nb; i++){
-    switch (current) {
+// ================ Draw ==========================
+
+void draw() {
+  
+ // =============== Tableau sans Spiral ===========
+
+ /*int k = 0;
+ tab(k);*/
+ 
+ // =================== Spiral ====================
+ // variable
+ int x = width/2;
+ int y = height/2;
+ box(10);
+ 
+ for(int i = 0, i < SQUARE_TAB; i++) {
+   stroke(400);
+   rectMode(CENTER);
+   if(sommeDesDiviseur(n) == 2 * n) { fill(16, 52, 166); } // Nombre parfait en bleu egyptien
+        else if(sommeDesDiviseur(n) == n + 1) { fill(121, 248, 248); } // Nombre premier en bleu cyan
+        else if(sommeDesDiviseur(n) <= 2 * n) { fill(6, 119, 144);  } // Nombre deficient bleu paon
+        else if(sommeDesDiviseur(n) >= 2 * n) { fill(142, 162, 198); } // Nombre abondant bleu charron
+        
+   switch (current) {
     case 0: x += stepSize;
     break;
     case 1: y -= stepSize;
@@ -59,43 +66,27 @@ void tab2(int nb) {
     }
   }
   step++;
-  rect(j*80, i*80, 80, 80);
-  }
- 
-}
 
-
-
-
-/* spirale */
-
-/*int x = width/2;
-int y = height/2;*/
-
-void draw() {
- /*int k = 0;
- tab(k);*/
- 
- /* deplacements */
-  
-  
-  
+ }
   //if(step > totalDir){
   //  noLoop();
   //}
-    //vertex(0, 0, 0);
-    // Somme Des diviseurs tests :
+
+
+// ========= Somme Des diviseurs tests :===========
+
     println(sommeDesDiviseur(9)); // 13
     println(sommeDesDiviseur(28)); // 56
     println(sommeDesDiviseur(12)); // 25
     println(sommeDesDiviseur(13)); // 14
-    // Nombre parfait tests :
+    
+// =================================================
+
     endShape();
 }
 
+// ============== Somme des diviseur ============== 
 
-
-// Somme des Diviseurs
 int sommeDesDiviseur(int n) {
   int somme = 0;
   for (int i = 1; i <= n ; i++) {
@@ -105,3 +96,27 @@ int sommeDesDiviseur(int n) {
   }
   return somme;
 }
+
+// =================================================
+
+// ============= Tableau sans spirales =============
+
+//void tab(int n){
+    
+//    for(int i = 0; i < SQUARE_TAB; i++) {
+//      for(int j = 0; j < SQUARE_TAB; j++) {
+//        n++;
+//        if(sommeDesDiviseur(n) == 2 * n) { fill(16, 52, 166); } // Nombre parfait en bleu egyptien
+//        else if(sommeDesDiviseur(n) == n + 1) { fill(121, 248, 248); } // Nombre premier en bleu cyan
+//        else if(sommeDesDiviseur(n) <= 2 * n) { fill(6, 119, 144);  } // Nombre deficient bleu paon
+//        else if(sommeDesDiviseur(n) >= 2 * n) { fill(142, 162, 198); } // Nombre abondant bleu charron
+        
+//        System.out.println( n + " :" + sommeDesDiviseur(n));
+//        rect(j*80, i*80, 80, 80);
+//    }
+//  }
+//}
+// =================================================
+
+
+
