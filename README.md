@@ -1,5 +1,8 @@
 # ProjetUlamIGSD
 
+projet final = code pour les box
+projet ulam = code pour faire la spiral avec des carrés
+
 Le but de ce projet est de realiser deux modèles 3D composées de morceaux (cubes,
 spheres, cylindres, etc..) dont chacun représente un nombre à partir de 1. Chaque morceaux
 est placé dans l’espace 3D par une technique que vous choisirez et implémenterez. Le
